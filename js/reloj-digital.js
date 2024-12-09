@@ -28,10 +28,15 @@ if (modoDashboard) {
           'url("./img/img2.jpg")',
           'url("./img/img3.jpg")',
           'url("./img/img4.jpg")',
-          'url("./img/img5.jpg")'
+          'url("./img/img5.jpg")',
+          'url("./img/img6.png")',
+          'url("./img/img7.jpg")',
+          'url("./img/img8.jpg")',
+          'url("./img/img9.jpg")',
+          'url("./img/img10.jpg")'
       ];
 
-      let currentReloj = 0;  // indice para recorrer las imagenes
+      let currentReloj = -1;  // indice para recorrer las imagenes
 
       
       /*****************************************
@@ -41,10 +46,15 @@ if (modoDashboard) {
         const dashboardIndex = document.getElementById('dashboard');
 
         if (dashboardIndex) {  // si dashboard existe, estoy en modo individual. Entonces muestro el fondo propio del modo individual
-          dashboardIndex.style.backgroundImage = imgFondoR[currentReloj]; // el estilo background-image en el css lo voy cambiando desde aqui
+          let randomReloj;
 
-          // currentIndex se queda en bucle infinito recorriendo el array imagenes gracias a %
-          currentReloj = (currentReloj + 1) % imgFondoR.length;  
+          do {
+            randomReloj = Math.floor(Math.random() * imgFondoR.length);
+          } while (randomReloj === currentReloj);
+
+          dashboardIndex.style.backgroundImage = imgFondoR[randomReloj]; // el estilo background-image en el css lo voy cambiando desde aqui
+
+          currentReloj = randomReloj; //
         }
       }
 

@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="css/reloj-digital.css">
         <link rel="stylesheet" href="css/password.css">
         <link rel="stylesheet" href="css/links.css">
+        <link rel="stylesheet" href="css/tiempo.css">
         <title>Dashboard</title>
     </head>
     <body>
@@ -20,13 +21,15 @@
                 <button onclick="abrirModulo('reloj-digital.html')">Reloj</button>
                 <button onclick="abrirModulo('password.html')">Password</button>
                 <button onclick="abrirModulo('links.html')">Links</button>
-                <button onclick="abrirModulo('links.html')">Tiempo</button>
+                <button onclick="abrirModulo('tiempo.html')">Tiempo</button>
             </div>
 
             <div id="reloj-digital-a"></div>            
             <div id="crea-contrasena-a"></div>
-            <div id="links-interesantes-a">Links</div>
-            <div id="meteo-a">Estación meteorológica</div>
+            <div id="links-interesantes-a"></div>
+            <div id="meteo-a">
+                <p id="enDesarrollo">Estacion meteorológica en desarrollo</p>
+            </div>
             
         </div>
         
@@ -35,6 +38,6 @@
         <script src="js/reloj-digital.js"></script>
         <script src="js/password.js"></script>
         <script src="js/links.js"></script>
-        <!-- <script src="js/tiempo.js"></script> -->
+        <script src="js/tiempo.js"></script>
     </body>
 </html>

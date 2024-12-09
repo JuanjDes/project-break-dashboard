@@ -30,10 +30,15 @@ if (modoDashboardL) {
             'url("./img/img2.jpg")',
             'url("./img/img3.jpg")',
             'url("./img/img4.jpg")',
-            'url("./img/img5.jpg")'
+            'url("./img/img5.jpg")',
+            'url("./img/img6.png")',
+            'url("./img/img7.jpg")',
+            'url("./img/img8.jpg")',
+            'url("./img/img9.jpg")',
+            'url("./img/img10.jpg")'
         ];
 
-        let currentLinks = 0;  // indice para recorrer las imagenes
+        let currentLinks = -1;  // indice para recorrer las imagenes
 
         /*****************************************
          FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
@@ -42,10 +47,15 @@ if (modoDashboardL) {
             const dashboardL = document.getElementById('dashboard');
 
             if (dashboardL) {  // si dashboardP existe, estoy en modo individual
-                dashboardL.style.backgroundImage = imgFondoL[currentLinks]; // el estilo background-image en el css lo voy cambiando desde aqui
+                let randomLinks;
+
+                do {
+                    randomLinks = Math.floor(Math.random() * imgFondoL.length);
+                } while (randomLinks === currentLinks);
+
+                dashboardL.style.backgroundImage = imgFondoL[randomLinks]; // el estilo background-image en el css lo voy cambiando desde aqui
         
-                // currentIndex se queda en bucle infinito recorriendo el array imagenes gracias a %
-                currentLinks = (currentLinks + 1) % imgFondoL.length;
+                currentLinks = randomLinks;
             }
             
         }
@@ -90,7 +100,7 @@ window.addEventListener('DOMContentLoaded', () => {
             numEnlaces = i;
         }
     }
-    console.log('numero de enlaces: ', numEnlaces);
+    
     nombreEnlace.value = '';
     urlEnlace.value = '';
 });

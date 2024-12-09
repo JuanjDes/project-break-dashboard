@@ -99,12 +99,25 @@ button {
     /* posicionado y centrado debajo de enlaces */
     position: absolute;
     height: 150px;
+    width: 650px;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 24px;
     font-weight: bold;
     color: white;
-    text-align: center;
     border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Capa semitransparente */
+    background-color: rgba(0, 0, 0, 0.4); /* Cambia el color y la opacidad */
+    background-blend-mode: overlay; /* Mezcla el color con la imagen */
+}
+
+#enDesarrollo {
+    /* texto de aviso (en desarrollo) dentro del div meteo-a */
+    /* display: none; */
+    color: rgba(255, 0, 0, 0.7);
+    font-weight: bold;
 }

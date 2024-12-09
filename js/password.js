@@ -15,7 +15,7 @@ if (modoDashboardP) {
             <div id="password-result"></div>
         </div>
         `; 
-        
+
 }   else {
 
     // array con 5 imágenes de ./img
@@ -24,10 +24,15 @@ if (modoDashboardP) {
             'url("./img/img2.jpg")',
             'url("./img/img3.jpg")',
             'url("./img/img4.jpg")',
-            'url("./img/img5.jpg")'
+            'url("./img/img5.jpg")',
+            'url("./img/img6.png")',
+            'url("./img/img7.jpg")',
+            'url("./img/img8.jpg")',
+            'url("./img/img9.jpg")',
+            'url("./img/img10.jpg")'
         ];
 
-        let currentPassword = 0;  // indice para recorrer las imagenes
+        let currentPassword = -1;  // indice para recorrer las imagenes.
 
         /*****************************************
          FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
@@ -36,10 +41,15 @@ if (modoDashboardP) {
             const dashboardP = document.getElementById('dashboard');
 
             if (dashboardP) {  // si dashboardP existe, estoy en modo individual
-                dashboardP.style.backgroundImage = imgFondoP[currentPassword]; // el estilo background-image en el css lo voy cambiando desde aqui
+                let randomPassword;
+
+                do {
+                    randomPassword = Math.floor(Math.random() * imgFondoP.length);
+                } while (randomPassword === currentPassword);
+
+                dashboardP.style.backgroundImage = imgFondoP[randomPassword]; // el estilo background-image en el css lo voy cambiando desde aqui
         
-                // currentIndex se queda en bucle infinito recorriendo el array imagenes gracias a %
-                currentPassword = (currentPassword + 1) % imgFondoP.length;
+                currentPassword = randomPassword;                
             }
             
         }

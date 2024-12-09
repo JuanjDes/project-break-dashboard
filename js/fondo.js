@@ -6,19 +6,32 @@ const imgFondo = [
     'url("./img/img2.jpg")',
     'url("./img/img3.jpg")',
     'url("./img/img4.jpg")',
-    'url("./img/img5.jpg")'
+    'url("./img/img5.jpg")',
+    'url("./img/img6.png")',
+    'url("./img/img7.jpg")',
+    'url("./img/img8.jpg")',
+    'url("./img/img9.jpg")',
+    'url("./img/img10.jpg")'
 ];
-
-let currentIndex = 0;  // indice para recorrer las imagenes
+/************************************************************ 
+ currentIndex a -1 como una forma de indicar que, al inicio,
+  no hay ninguna imagen mostrada todavía.
+************************************************************/
+let currentIndex = -1;
 
 /*****************************************
   FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
 ******************************************/
 function changeBackground() {
-    dashboard.style.backgroundImage = imgFondo[currentIndex]; // el estilo background-image en el css lo voy cambiando desde aqui
-  
-    // currentIndex se queda en bucle infinito recorriendo el array imagenes gracias a %
-    currentIndex = (currentIndex + 1) % imgFondo.length;
+  let randomIndex;
+
+  do {
+    randomIndex = Math.floor(Math.random() * imgFondo.length);
+  } while (randomIndex === currentIndex);
+
+    dashboard.style.backgroundImage = imgFondo[randomIndex]; // el estilo background-image en el css lo voy cambiando desde aqui
+
+    currentIndex = randomIndex;
   }
 
 // cambia la imagen cada 5 segundos
