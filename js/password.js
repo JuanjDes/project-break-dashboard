@@ -1,7 +1,57 @@
-const contrasenaDiv = document.getElementById('contrasena');
-const generarBtn = document.getElementById('generar');
-const numCaracteres = document.getElementById('caracteres');
-const passwordGenerada = document.getElementById('password-result');
+/* modoDashboardP sera true si existe el contenedor crea-contrasena-a. Quiere decir que estoy en
+    la página principal (index.html) */
+const modoDashboardP = !!document.getElementById('crea-contrasena-a');
+
+let contrasenaDiv, generarBtn, numCaracteres, passwordGenerada;
+
+if (modoDashboardP) {
+    const contrasenaContainer = document.getElementById('crea-contrasena-a');
+    contrasenaContainer.innerHTML = `
+        <div id="contrasena">
+            <h2>Genera una contraseña segura</h2>
+            <label for="caracteres" name="caracteres">Caracteres de la contraseña: 12 a 50 </label>
+            <input type="number" name="caracteres" id="caracteres" value="12" min="12" max="50">
+            <button id="generar">Generar contraseña</button>
+            <div id="password-result"></div>
+        </div>
+        `; 
+        
+}   else {
+
+    // array con 5 imágenes de ./img
+        const imgFondoP = [
+            'url("./img/img1.png")',
+            'url("./img/img2.jpg")',
+            'url("./img/img3.jpg")',
+            'url("./img/img4.jpg")',
+            'url("./img/img5.jpg")'
+        ];
+
+        let currentPassword = 0;  // indice para recorrer las imagenes
+
+        /*****************************************
+         FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
+        ******************************************/
+        function changeBackground() {
+            const dashboardP = document.getElementById('dashboard');
+
+            if (dashboardP) {  // si dashboardP existe, estoy en modo individual
+                dashboardP.style.backgroundImage = imgFondoP[currentPassword]; // el estilo background-image en el css lo voy cambiando desde aqui
+        
+                // currentIndex se queda en bucle infinito recorriendo el array imagenes gracias a %
+                currentPassword = (currentPassword + 1) % imgFondoP.length;
+            }
+            
+        }
+
+        setInterval(changeBackground, 5000);
+        changeBackground();
+    }
+
+contrasenaDiv = document.getElementById('contrasena');
+generarBtn = document.getElementById('generar');
+numCaracteres = document.getElementById('caracteres');
+passwordGenerada = document.getElementById('password-result');
 
 // ARRAYS CON LETRAS MAYUSCULAS, MINUSCULAS, NUMEROS DE 0 A 9 Y CARACTERES ESPECIALES
 const arrayMayusculas = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
@@ -29,3 +79,6 @@ generarBtn.addEventListener('click', () => {
     }
     passwordGenerada.innerText = contrasena;
 });
+
+
+

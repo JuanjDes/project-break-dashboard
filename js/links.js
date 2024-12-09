@@ -1,9 +1,61 @@
-/* Recibo nombre y url de enlaces desde el DOM */    
-const linksDiv = document.getElementById('links');
-const divEnlaces = document.getElementById('divEnlaces');
-const nombreEnlace = document.getElementById('nombreEnlace');
-const urlEnlace = document.getElementById('urlEnlace');
-const btnAgregar = document.getElementById('btnAgregar');
+/* modoDashboardL sera true si existe el contenedor links-interesantes-a. Quiere decir que estoy en
+    la página principal (index.html) */
+const modoDashboardL = !!document.getElementById('links-interesantes-a');
+
+let linksDiv, divEnlaces, nombreEnlace, urlEnlace, btnAgregar;
+
+if (modoDashboardL) {
+    const enlacesContainer = document.getElementById('links-interesantes-a');
+    enlacesContainer.innerHTML = `
+        <div id="links">
+            <h2>Añade tu enlace de interés</h2>
+            <input type="text" name="nombreEnlace" id="nombreEnlace" placeholder="nombre de tu enlace" value = ''>
+            <input type="text" name="urlEnlace" id="urlEnlace" placeholder="Url de tu enlace" value = ''>
+            <button id="btnAgregar">Añadir enlace</button>
+        </div>
+        <div id="divEnlaces"></div> 
+    `;
+
+    /* Recibo nombre y url de enlaces desde el DOM */    
+    linksDiv = document.getElementById('links');
+    divEnlaces = document.getElementById('divEnlaces');
+    nombreEnlace = document.getElementById('nombreEnlace');
+    urlEnlace = document.getElementById('urlEnlace');
+    btnAgregar = document.getElementById('btnAgregar');
+
+}   else {
+        // array con 5 imágenes de ./img
+        const imgFondoL = [
+            'url("./img/img1.png")',
+            'url("./img/img2.jpg")',
+            'url("./img/img3.jpg")',
+            'url("./img/img4.jpg")',
+            'url("./img/img5.jpg")'
+        ];
+
+        let currentLinks = 0;  // indice para recorrer las imagenes
+
+        /*****************************************
+         FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
+        ******************************************/
+        function changeBackground() {
+            const dashboardL = document.getElementById('dashboard');
+
+            if (dashboardL) {  // si dashboardP existe, estoy en modo individual
+                dashboardL.style.backgroundImage = imgFondoL[currentLinks]; // el estilo background-image en el css lo voy cambiando desde aqui
+        
+                // currentIndex se queda en bucle infinito recorriendo el array imagenes gracias a %
+                currentLinks = (currentLinks + 1) % imgFondoL.length;
+            }
+            
+        }
+
+        setInterval(changeBackground, 5000);
+        changeBackground();
+    }
+
+
+
 
 let numEnlaces = 0;
 

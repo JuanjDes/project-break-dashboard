@@ -1,4 +1,4 @@
-const dashboard = document.getElementById('dashboard'); // en dashboard ire mostrando las imagenes de fondo
+const dashboard = document.getElementById('dashboard-index'); // en dashboard ire mostrando las imagenes de fondo
 
 // array con 5 imágenes de ./img
 const imgFondo = [
@@ -27,7 +27,6 @@ setInterval(changeBackground, 5000);
 changeBackground();
 
 function abrirModulo(url) {
-  console.log(url);
   // abre una nueva ventana con la url del modulo
   window.open(url, '_blank');
 }

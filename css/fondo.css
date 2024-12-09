@@ -13,7 +13,7 @@ body {
 }
 
 
-#dashboard {
+#dashboard-index {
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -30,4 +30,81 @@ body {
     /* Capa semitransparente */
     background-color: rgba(0, 0, 0, 0.7); /* Cambia el color y la opacidad */
     background-blend-mode: overlay; /* Mezcla el color con la imagen */
+}
+
+#enlaces {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin: 20px auto;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: rgba(76, 175, 80, 0.5); /* fondo con transparencia */
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reloj-digital-a {
+    /* posicionado y centrado encima de enlaces */
+    position: absolute;
+    width: 500px;
+    height: 200px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(29, 4, 250, 0.7);
+    text-align: center;
+    background-color: rgba(226, 208, 208, 0.5); /* fondo con transparencia */
+    background-blend-mode: overlay; /* Mezcla el color con la imagen */
+    border-radius: 10px;
+}
+
+#crea-contrasena-a {
+    /* posicionado y centrado a la izquierda de enlaces */
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#links-interesantes-a {
+    /* posicionado y centrado a la derecha de enlaces */
+    position: absolute;
+    right: 20px;
+    top: 60%;
+    transform: translateY(-60%);
+    width: 380px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#meteo-a {
+    /* posicionado y centrado debajo de enlaces */
+    position: absolute;
+    height: 150px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    border: 1px solid white;
 }

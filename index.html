@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/fondo.css">
+        <link rel="stylesheet" href="css/reloj-digital.css">
+        <link rel="stylesheet" href="css/password.css">
+        <link rel="stylesheet" href="css/links.css">
         <title>Dashboard</title>
     </head>
     <body>
@@ -11,24 +14,27 @@
 
         </header>
         
-        <div id="dashboard">
-            <div class="module">
-                <div id="reloj-digital"></div>
-                <button onclick="abrirModulo('reloj-digital.html')">Reloj Digital</button>
+        <div id="dashboard-index">
+
+            <div id="enlaces">
+                <button onclick="abrirModulo('reloj-digital.html')">Reloj</button>
+                <button onclick="abrirModulo('password.html')">Password</button>
+                <button onclick="abrirModulo('links.html')">Links</button>
+                <button onclick="abrirModulo('links.html')">Tiempo</button>
             </div>
+
+            <div id="reloj-digital-a"></div>            
+            <div id="crea-contrasena-a"></div>
+            <div id="links-interesantes-a">Links</div>
+            <div id="meteo-a">Estación meteorológica</div>
             
-            <div class="module">
-                <div id="crea-contrasena"></div>
-                <button onclick="abrirModulo('password.html')">Crea password</button>
-            </div>
-            
-            <div class="module">
-                <div id="links-interesantes"></div>
-                <button onclick="abrirModulo('links.html')">Links de interes</button>
-            </div>
         </div>
         
         
         <script src="js/fondo.js"></script>
+        <script src="js/reloj-digital.js"></script>
+        <script src="js/password.js"></script>
+        <script src="js/links.js"></script>
+        <!-- <script src="js/tiempo.js"></script> -->
     </body>
 </html>

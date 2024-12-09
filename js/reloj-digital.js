@@ -1,37 +1,65 @@
-// array con 5 imágenes de ./img
-const imgFondo = [
-    'url("./img/img1.png")',
-    'url("./img/img2.jpg")',
-    'url("./img/img3.jpg")',
-    'url("./img/img4.jpg")',
-    'url("./img/img5.jpg")'
-];
+/* modoDashboard sera true si existe el contenedor reloj-digital-a. Quiere decir que estoy en
+    la página principal (index.html) */
+const modoDashboard = !!document.getElementById('reloj-digital-a');
 
-let currentIndex = 0;  // indice para recorrer las imagenes
+let horaDiv, fechaDiv, zonaHorariaDiv, fraseDiv, dashboardR, relojDigital;
 
-// RECOJO LOS DIV DEL HTML
-const dashboard = document.getElementById('dashboard'); // en dashboard ire mostrando las imagenes de fondo
-const fraseDiv = document.getElementById('fraseDiv');
-const zonaHorariaDiv = document.getElementById('zonaHorariaDiv');
-const relojDigital = document.getElementById('reloj-digital');
-const horaDiv = document.getElementById('hora');
-const fechaDiv = document.getElementById('fecha');
+/* si estoy en index.html me traigo el contenedor de reloj-digital y le añado divs para
+    hora, fecha, zona horaria y frase  */
+if (modoDashboard) {
+  const relojContainer = document.getElementById('reloj-digital-a');
 
-/*****************************************
-  FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
-******************************************/
-function changeBackground() {
-  dashboard.style.backgroundImage = imgFondo[currentIndex]; // el estilo background-image en el css lo voy cambiando desde aqui
+  relojContainer.innerHTML = `
+    <div id="hora"></div>
+    <div id="fecha" style="font-size: 18px;"></div>
+    <br>
+    <div id="zonaHorariaDiv" style="font-size: 18px;"></div>
+    <hr>
+    <div id="fraseDiv"></div>
+    `;
 
-  // currentIndex se queda en bucle infinito recorriendo el array imagenes gracias a %
-  currentIndex = (currentIndex + 1) % imgFondo.length;
-}
+} else {
+
+      relojDigital = document.getElementById('reloj-digital');
+
+      // array con 5 imágenes de ./img
+      const imgFondoR = [
+          'url("./img/img1.png")',
+          'url("./img/img2.jpg")',
+          'url("./img/img3.jpg")',
+          'url("./img/img4.jpg")',
+          'url("./img/img5.jpg")'
+      ];
+
+      let currentReloj = 0;  // indice para recorrer las imagenes
+
+      
+      /*****************************************
+        FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
+      ******************************************/
+      function changeBackground() {
+        const dashboardIndex = document.getElementById('dashboard');
+
+        if (dashboardIndex) {  // si dashboard existe, estoy en modo individual. Entonces muestro el fondo propio del modo individual
+          dashboardIndex.style.backgroundImage = imgFondoR[currentReloj]; // el estilo background-image en el css lo voy cambiando desde aqui
+
+          // currentIndex se queda en bucle infinito recorriendo el array imagenes gracias a %
+          currentReloj = (currentReloj + 1) % imgFondoR.length;  
+        }
+      }
 
 
-// cambia la imagen cada 5 segundos
-setInterval(changeBackground, 5000);
-// iniciamos con la primera imagen
-changeBackground();
+      // cambia la imagen cada 5 segundos
+      setInterval(changeBackground, 5000);
+      // iniciamos con la primera imagen
+      changeBackground();
+  }
+
+// hago referencia a los contenedores en el modo Individual
+horaDiv = document.getElementById('hora');
+fechaDiv = document.getElementById('fecha');
+zonaHorariaDiv = document.getElementById('zonaHorariaDiv');
+fraseDiv = document.getElementById('fraseDiv');
 
 
 /************************************************************************
@@ -88,7 +116,7 @@ function obtenerFrase() {
       frase = 'Es hora de descansar. Apaga y sigue mañana';
       break;
     case (hora >= 7 && hora <= 12):
-      frase = 'Buenos días. Desayuna fuerta y a darle al código';
+      frase = 'Buenos días. Desayuna fuerte y a darle al código';
       break;
     case (hora >= 12 && hora <= 14):
       frase = 'Buenas tardes. Déjame que el código te ayude';
