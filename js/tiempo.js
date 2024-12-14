@@ -9,14 +9,103 @@
 
 
 
+/* modoDashboardT sera true si existe el contenedor meteo-a. Quiere decir que estoy en
+    la página principal (index.html) */
+const modoDashboardT = !!document.getElementById('meteo-a');
+console.log(modoDashboardT);
+
 const dashboardDiv = document.getElementById('dashboard');
+const tiempoDiv = document.getElementById('tiempo');
 
-// Funcion fecth para llamar a la API del tiempo: http://api.weatherapi.com/v1
 
-async function getWeatherData(city) {
+// obtengo ubicacion precisa del navegador y recojo datos del tiempo
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(async (position) => {
+    const { latitude, longitude } = position.coords;
+
+    const data = await getWeatherData(latitude, longitude);
+    console.log(data);
+
+    mostrarDatosClima(data);
+  })
+}
+
+
+function mostrarDatosClima(data) {
+  if (modoDashboardT) {
+    const tiempoContainer = document.getElementById('meteo-a');
+    // en tiempoContainer muestro la información del tiempo
+    tiempoContainer.innerHTML = `
+      <h2>Tiempo hoy en ${data.location.region} (${data.location.country})</h2>
+      <p>Temperatura: ${data.current.temp_c} ºC</p>
+      <p>Humedad: ${data.current.humidity}%</p>
+      <p>Velocidad del viento: ${data.current.wind_kph} km/h</p>
+      <p>Clima: ${data.current.condition.text}</p>
+      <img src="${data.current.condition.icon}" alt="${data.current.condition.text}">
+    `;
+
+  } else {
+
+      // array con 5 imágenes de ./img
+      const imgFondoT = [
+        'url("./img/img1.png")',
+        'url("./img/img2.jpg")',
+        'url("./img/img3.jpg")',
+        'url("./img/img4.jpg")',
+        'url("./img/img5.jpg")',
+        'url("./img/img6.png")',
+        'url("./img/img7.jpg")',
+        'url("./img/img8.jpg")',
+        'url("./img/img9.jpg")',
+        'url("./img/img10.jpg")'
+    ];
+
+    let currentTiempo = -1;  // indice para recorrer las imagenes
+
+        /*****************************************
+         FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
+        ******************************************/
+        function changeBackground() {
+
+            const dashboardT = document.getElementById('dashboard');
+
+            if (dashboardT) {  // si dashboardT existe, estoy en modo individual
+
+                let randomTiempo;
+
+                do {
+                    randomTiempo = Math.floor(Math.random() * imgFondoT.length);
+                } while (randomTiempo === currentTiempo);
+
+                dashboardT.style.backgroundImage = imgFondoT[randomTiempo]; // el estilo background-image en el css lo voy cambiando desde aqui
+        
+                currentTiempo = randomTiempo;
+            }
+            
+        }
+
+        setInterval(changeBackground, 5000);
+        changeBackground();
+    }
+
+
+      // mostramos datos en pantalla (dashboard)
+      tiempoDiv.innerHTML = `
+        <h2>Tiempo hoy en ${data.location.region} (${data.location.country})</h2>
+        <p>Temperatura: ${data.current.temp_c} ºC</p>
+        <p>Humedad: ${data.current.humidity}%</p>
+        <p>Velocidad del viento: ${data.current.wind_kph} km/h</p>
+        <p>Descripción del clima: ${data.current.condition.text}</p>
+        <img src="${data.current.condition.icon}" alt="${data.current.condition.text}">
+      `;
+}
+
+
+async function getWeatherData(latitude, longitude) {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=auto:ip`
+      `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=${latitude},${longitude}`
+      /* `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=auto:ip` */
     );
 
     if (!response.ok) {
@@ -24,11 +113,8 @@ async function getWeatherData(city) {
     }
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error('Error:', error);
   }
 }
-let ciudad = "Madrid";
-getWeatherData(ciudad);

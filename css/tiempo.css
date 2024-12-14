@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #f1f1f1;
-    color: #333;
+    /* color: #333; */
     overflow: hidden;
     transition: background-color 0.5s ease;
 }
@@ -30,4 +30,25 @@ body {
     /* Capa semitransparente */
     background-color: rgba(0, 0, 0, 0.7); /* Cambia el color y la opacidad */
     background-blend-mode: overlay; /* Mezcla el color con la imagen */
+}
+
+#tiempoDiv {
+    font-size: 50px;
+    margin-bottom: 20px;
+    /* color del texto en blanco y bold */
+    color: #fff;
+    font-weight: bold;
+}
+
+#tiempo h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #022ff8;
+    font-weight: bold;
+}
+
+#tiempo p {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
 }

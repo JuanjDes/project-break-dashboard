@@ -72,7 +72,7 @@ button {
 #crea-contrasena-a {
     /* posicionado y centrado a la izquierda de enlaces */
     position: absolute;
-    left: 20px;
+    left: 5px;
     top: 50%;
     transform: translateY(-50%);
     width: 400px;
@@ -98,26 +98,38 @@ button {
 #meteo-a {
     /* posicionado y centrado debajo de enlaces */
     position: absolute;
-    height: 150px;
-    width: 650px;
+    height: 200px;
+    width: 680px;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 24px;
+    font-size: 14px;
     font-weight: bold;
     color: white;
     border: 1px solid white;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     /* Capa semitransparente */
     background-color: rgba(0, 0, 0, 0.4); /* Cambia el color y la opacidad */
     background-blend-mode: overlay; /* Mezcla el color con la imagen */
+    border-radius: 10px;
 }
 
-#enDesarrollo {
-    /* texto de aviso (en desarrollo) dentro del div meteo-a */
-    /* display: none; */
-    color: rgba(255, 0, 0, 0.7);
+/* h2 dentro del id meteo-a centrado y encima del resto de datos */
+#meteo-a h2 {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
     font-weight: bold;
+}
+
+#meteo-a p {
+    border: 1px solid white;
+    padding: 5px;
 }
