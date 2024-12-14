@@ -104,20 +104,24 @@ btnAgregar.addEventListener('click', () => {
 
 // recargo la pagina
 window.addEventListener('DOMContentLoaded', () => {
-    for(let i = 1; i <= localStorage.length; i++) {
-        const link = JSON.parse(localStorage.getItem(`enlace_${i}`));
-
-        if (link) {
-            divEnlaces.innerHTML += `
-
-            <div class="link-container" id="link-${link.url}">
-                <button id="btnEnlaces" onclick="abrirLink('http://${link.url}')">${link.nombre}</button>
-                <span class="btn-borrar" onclick="borrarLink('${link.url}')">X</span>
-            </div>
-
-            `;
-            
-            numEnlaces = i;
+    // itero sobre localStorage, pero recupero la key (item - enlace_ )
+    for(let i = 0; i <= localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('enlace_')) {
+            const link = JSON.parse(localStorage.getItem(key));
+         
+            if (link) {
+                divEnlaces.innerHTML += `
+    
+                <div class="link-container" id="link-${link.url}">
+                    <button id="btnEnlaces" onclick="abrirLink('http://${link.url}')">${link.nombre}</button>
+                    <span class="btn-borrar" onclick="borrarLink('${link.url}')">X</span>
+                </div>
+    
+                `;
+                
+                numEnlaces = i;
+            }
         }
     }
     
@@ -143,11 +147,10 @@ function borrarLink(url) {
     
             if (item.url === url) {
                 localStorage.removeItem(key);
-                console.log(`El enlace con URL "${url}" ha sido eliminado.`);
 
                 // Eliminar el contenedor del enlace del DOM
                 const linkContainer = document.getElementById(`link-${url}`);
-                console.log('linkContainer', linkContainer);
+                
                 if (linkContainer) {
                     linkContainer.remove(); }
                 return; // salimos del bucle para no seguir buscando en el resto de los enlaces
