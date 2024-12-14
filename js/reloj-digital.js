@@ -140,7 +140,7 @@ function obtenerFrase() {
     case (hora >= 18 && hora <= 22):
       frase = 'Esto ya son horas extras... piensa en parar pronto';
       break;
-    case (hora >= 22 && hora <= 0):
+    case (hora >= 22 && hora <= 24):
       frase = 'Es hora de dormir. Vuelve a la noche';
       break;
     default:
