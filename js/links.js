@@ -5,6 +5,7 @@ const modoDashboardL = !!document.getElementById('links-interesantes-a');
 let linksDiv, divEnlaces, nombreEnlace, urlEnlace, btnAgregar;
 
 if (modoDashboardL) {
+    // estoy en la página principal (index.html)
     const enlacesContainer = document.getElementById('links-interesantes-a');
     enlacesContainer.innerHTML = `
         <div id="links">
@@ -16,14 +17,11 @@ if (modoDashboardL) {
         <div id="divEnlaces"></div> 
     `;
 
-    /* Recibo nombre y url de enlaces desde el DOM */    
-    linksDiv = document.getElementById('links');
-    divEnlaces = document.getElementById('divEnlaces');
-    nombreEnlace = document.getElementById('nombreEnlace');
-    urlEnlace = document.getElementById('urlEnlace');
-    btnAgregar = document.getElementById('btnAgregar');
+    recibirDivsDom();
 
 }   else {
+        // estoy en links.html
+
         // array con 5 imágenes de ./img
         const imgFondoL = [
             'url("./img/img1.png")',
@@ -38,15 +36,19 @@ if (modoDashboardL) {
             'url("./img/img10.jpg")'
         ];
 
+        recibirDivsDom();
+
         let currentLinks = -1;  // indice para recorrer las imagenes
 
         /*****************************************
          FUNCION PARA CAMBIAR LA IMAGEN DE FONDO
         ******************************************/
         function changeBackground() {
+
             const dashboardL = document.getElementById('dashboard');
 
             if (dashboardL) {  // si dashboardP existe, estoy en modo individual
+
                 let randomLinks;
 
                 do {
@@ -65,7 +67,13 @@ if (modoDashboardL) {
     }
 
 
-
+function recibirDivsDom() {
+    linksDiv = document.getElementById('links');
+    divEnlaces = document.getElementById('divEnlaces');
+    nombreEnlace = document.getElementById('nombreEnlace');
+    urlEnlace = document.getElementById('urlEnlace');
+    btnAgregar = document.getElementById('btnAgregar');
+}
 
 let numEnlaces = 0;
 
@@ -81,9 +89,14 @@ btnAgregar.addEventListener('click', () => {
     // Almaceno en localStorage
     localStorage.setItem(`enlace_${numEnlaces}`, JSON.stringify(nuevoLink)); // guardo en localStorage nuevoLink en formato String
     
-    // muestro en pantalla el nombre del enlace en formato boton
+    // muestro en pantalla el nombre del enlace en formato boton con una X para poder borrarlo
     divEnlaces.innerHTML += `
-    <button id="btnEnlaces" onclick="abrirLink('http://${nuevoLink.url}')">${nuevoLink.nombre}</button>`;
+        <div class="link-container" id="link-${nuevoLink.url}">
+            <button id="btnEnlaces" onclick="abrirLink('http://${nuevoLink.url}')">${nuevoLink.nombre}</button>
+            <span class="btn-borrar" onclick="borrarLink('${nuevoLink.url}')">X</span>
+        </div>    
+        `;
+            
     
     nombreEnlace.value = '';
     urlEnlace.value = '';
@@ -93,10 +106,17 @@ btnAgregar.addEventListener('click', () => {
 window.addEventListener('DOMContentLoaded', () => {
     for(let i = 1; i <= localStorage.length; i++) {
         const link = JSON.parse(localStorage.getItem(`enlace_${i}`));
+
         if (link) {
             divEnlaces.innerHTML += `
-            <button id="btnEnlaces" onclick="abrirLink('http://${link.url}')">${link.nombre}</button>`;
 
+            <div class="link-container" id="link-${link.url}">
+                <button id="btnEnlaces" onclick="abrirLink('http://${link.url}')">${link.nombre}</button>
+                <span class="btn-borrar" onclick="borrarLink('${link.url}')">X</span>
+            </div>
+
+            `;
+            
             numEnlaces = i;
         }
     }
@@ -108,4 +128,30 @@ window.addEventListener('DOMContentLoaded', () => {
 // Funcion abrirlink() se utiliza en los onclick en los botones de los enlaces
 function abrirLink(url) {
     window.open(url, '_blank'); // abro en una pestaña nueva
+}
+
+
+/* Funcion borrarLink() se utiliza en el onclick en los span de borrar
+    url contiene la url del boton que quiero borrar. */
+function borrarLink(url) {
+    // Eliminar el enlace del localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i); // obtenemos la clave de localStorage en la posicion i
+    
+        if (key.startsWith('enlace_')) {
+            const item = JSON.parse(localStorage.getItem(key));
+    
+            if (item.url === url) {
+                localStorage.removeItem(key);
+                console.log(`El enlace con URL "${url}" ha sido eliminado.`);
+
+                // Eliminar el contenedor del enlace del DOM
+                const linkContainer = document.getElementById(`link-${url}`);
+                console.log('linkContainer', linkContainer);
+                if (linkContainer) {
+                    linkContainer.remove(); }
+                return; // salimos del bucle para no seguir buscando en el resto de los enlaces
+            } 
+        }
+    }
 }
