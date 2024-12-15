@@ -19,23 +19,24 @@ if (modoDashboardT) {
     <p>Obteniendo información del Clima ...</p>
     <p>API restringe peticiones ...</p>
     `;
+} else {
+    /* const dashboardDiv = document.getElementById('dashboard'); */
+    const tiempoDiv = document.getElementById('tiempo');
+    tiempoDiv.innerHTML = `
+        <p>Obteniendo información del Clima ...</p>
+        <p>API restringe peticiones ...</p>
+        `;
 }
 
-const dashboardDiv = document.getElementById('dashboard');
-const tiempoDiv = document.getElementById('tiempo');
-tiempoDiv.innerHTML = `
-    <p>Obteniendo información del Clima ...</p>
-    <p>API restringe peticiones ...</p>
-    `;
 
 
 /* obtengo ubicacion precisa del navegador y recojo datos del tiempo 
     no utilizo funcion asincrona con await porque retrasa mucho la carga de la página */
 if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition((position) => {
+  navigator.geolocation.getCurrentPosition(async (position) => {
     const { latitude, longitude } = position.coords;
 
-    const data = getWeatherData(latitude, longitude);
+    const data = await getWeatherData(latitude, longitude);
 
     mostrarDatosClima(data);
   })
@@ -45,6 +46,8 @@ if (navigator.geolocation) {
 function mostrarDatosClima(data) {
 
   if (modoDashboardT) {
+    
+    const tiempoContainer = document.getElementById('meteo-a');
 
     // en tiempoContainer muestro la información del tiempo
     tiempoContainer.innerHTML = `
@@ -101,6 +104,8 @@ function mostrarDatosClima(data) {
         changeBackground();
     }
 
+      const tiempoDiv = document.getElementById('tiempo');
+      
       // mostramos datos en pantalla (dashboard)
       tiempoDiv.innerHTML = `
         <h5>Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></h5>
@@ -119,7 +124,6 @@ async function getWeatherData(latitude, longitude) {
   try {
     const response = await fetch(
       `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=${latitude},${longitude}&lang=es`
-      /* `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=auto:ip&lang=es` */
     );
 
     if (!response.ok) {
