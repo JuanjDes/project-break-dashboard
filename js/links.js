@@ -19,7 +19,7 @@ if (modoDashboardL) {
 
     recibirDivsDom();
 
-}   else {
+}   else { 
         // estoy en links.html
 
         // array con 5 imágenes de ./img

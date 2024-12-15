@@ -132,7 +132,7 @@ function obtenerFrase() {
       frase = 'Buenas tardes. Déjame que el código te ayude';
       break;
     case (hora >= 14 && hora <= 16):
-      frase = 'Espero que hayas comido';
+      frase = 'Espero que hayas comido'; 
       break;
     case (hora >= 16 && hora <= 18):
       frase = 'Buenas tardes, el último empujón';

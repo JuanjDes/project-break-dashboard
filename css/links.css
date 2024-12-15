@@ -35,7 +35,7 @@ body {
 
 
 /* div para título, campos y boton de los enlaces */
-#links {
+#links { 
     display: flex;
     flex-direction: column;
     justify-content: center;

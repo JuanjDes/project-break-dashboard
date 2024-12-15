@@ -13,16 +13,23 @@
     la página principal (index.html) */
 const modoDashboardT = !!document.getElementById('meteo-a');
 
+if (modoDashboardT) {
+  const tiempoContainer = document.getElementById('meteo-a');
+  tiempoContainer.innerHTML = '<p>Obteniendo información del Clima ...</p>';
+}
+
 const dashboardDiv = document.getElementById('dashboard');
 const tiempoDiv = document.getElementById('tiempo');
+tiempoDiv.innerHTML = '<p>Obteniendo información del Clima ...</p>';
 
 
-// obtengo ubicacion precisa del navegador y recojo datos del tiempo
+/* obtengo ubicacion precisa del navegador y recojo datos del tiempo 
+    no utilizo funcion asincrona con await porque retrasa mucho la carga de la página */
 if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(async (position) => {
+  navigator.geolocation.getCurrentPosition((position) => {
     const { latitude, longitude } = position.coords;
 
-    const data = await getWeatherData(latitude, longitude);
+    const data = getWeatherData(latitude, longitude);
 
     mostrarDatosClima(data);
   })
@@ -32,11 +39,10 @@ if (navigator.geolocation) {
 function mostrarDatosClima(data) {
 
   if (modoDashboardT) {
-    const tiempoContainer = document.getElementById('meteo-a');
 
     // en tiempoContainer muestro la información del tiempo
     tiempoContainer.innerHTML = `
-      <h3>Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></h3>
+      <h5>Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></h5>
       <h2>Tiempo hoy en ${data.location.region} (${data.location.country})</h2>
       <p>Temp: ${data.current.temp_c} ºC</p>
       <p>Humedad: ${data.current.humidity}%</p>
@@ -91,7 +97,7 @@ function mostrarDatosClima(data) {
 
       // mostramos datos en pantalla (dashboard)
       tiempoDiv.innerHTML = `
-        <h3>Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></h3>
+        <h5>Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></h5>
         <h2>Tiempo hoy en ${data.location.region} (${data.location.country})</h2>
         <hr>
         <p>Temp: ${data.current.temp_c} ºC</p>
@@ -100,14 +106,14 @@ function mostrarDatosClima(data) {
         <p>Clima: ${data.current.condition.text}</p>
         <img src="${data.current.condition.icon}" alt="${data.current.condition.text}">
       `;
-}
+} 
 
 
 async function getWeatherData(latitude, longitude) {
   try {
     const response = await fetch(
       `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=${latitude},${longitude}&lang=es`
-      /* `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=auto:ip` */
+      /* `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=auto:ip&lang=es` */
     );
 
     if (!response.ok) {

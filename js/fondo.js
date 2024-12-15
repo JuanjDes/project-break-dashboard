@@ -31,7 +31,7 @@
 
       dashboardIndex.style.backgroundImage = imgFondo[randomIndex]; // el estilo background-image en el css lo voy cambiando desde aqui
 
-      currentIndex = randomIndex;
+      currentIndex = randomIndex; 
     }
 
   // cambia la imagen cada 5 segundos
@@ -42,5 +42,5 @@
 
 function abrirModulo(url) {
   // abre una nueva ventana con la url del modulo
-  window.open(url, '_blank');
+  window.open(url, '_self');
 }

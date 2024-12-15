@@ -70,7 +70,7 @@ const arrayNumeros = ['0','1','2','3','4','5','6','7','8','9'];
 const arrayEspeciales = ['!','@','#','$','%','^','&','*','(',')','-','_','=','+','[','{',']','}',';',':','"',',','.','<','>','/','?'];
 
 // EVENTO DE CLICK EN BOTON Generar contraseña
-generarBtn.addEventListener('click', () => {
+generarBtn.addEventListener('click', () => { 
     let contrasena = '';
     const caracteresTotales = parseInt(numCaracteres.value, 10);
 
