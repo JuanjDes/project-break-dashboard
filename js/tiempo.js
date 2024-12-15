@@ -105,7 +105,7 @@ function mostrarDatosClima(data) {
     }
 
       const tiempoDiv = document.getElementById('tiempo');
-      
+
       // mostramos datos en pantalla (dashboard)
       tiempoDiv.innerHTML = `
         <h5>Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></h5>
@@ -123,7 +123,7 @@ function mostrarDatosClima(data) {
 async function getWeatherData(latitude, longitude) {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=${latitude},${longitude}&lang=es`
+      `https://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=${latitude},${longitude}&lang=es`
     );
 
     if (!response.ok) {
