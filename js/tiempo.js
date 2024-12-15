@@ -2,7 +2,7 @@
     API del tiempo:                 https://www.weatherapi.com/
     Probar que funciona la API Key: https://www.weatherapi.com/api-explorer.aspx
     Documentacion de la API:        https://www.weatherapi.com/docs/
-    Base url para peticiones:       http://api.weatherapi.com/v1
+    Base url para peticiones:       https://api.weatherapi.com/v1
     Ejemplo de peticion:            https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&aqi=no
 
 */
