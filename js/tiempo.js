@@ -15,12 +15,18 @@ const modoDashboardT = !!document.getElementById('meteo-a');
 
 if (modoDashboardT) {
   const tiempoContainer = document.getElementById('meteo-a');
-  tiempoContainer.innerHTML = '<p>Obteniendo información del Clima ...</p>';
+  tiempoContainer.innerHTML = `
+    <p>Obteniendo información del Clima ...</p>
+    <p>API restringe peticiones ...</p>
+    `;
 }
 
 const dashboardDiv = document.getElementById('dashboard');
 const tiempoDiv = document.getElementById('tiempo');
-tiempoDiv.innerHTML = '<p>Obteniendo información del Clima ...</p>';
+tiempoDiv.innerHTML = `
+    <p>Obteniendo información del Clima ...</p>
+    <p>API restringe peticiones ...</p>
+    `;
 
 
 /* obtengo ubicacion precisa del navegador y recojo datos del tiempo 
