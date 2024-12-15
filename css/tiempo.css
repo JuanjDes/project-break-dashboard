@@ -32,18 +32,31 @@ body {
     background-blend-mode: overlay; /* Mezcla el color con la imagen */
 }
 
-#tiempoDiv {
+#tiempo {
     font-size: 50px;
     margin-bottom: 20px;
     /* color del texto en blanco y bold */
     color: #fff;
     font-weight: bold;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 20px;
+    /* Capa semitransparente */
+    background-color: rgba(148, 144, 144, 0.7); /* Cambia el color y la opacidad */
+    background-blend-mode: overlay; /* Mezcla el color con la imagen */
 }
 
 #tiempo h2 {
     margin-bottom: 10px;
     font-size: 20px;
-    color: #022ff8;
+    color: #0f0f0f;
+    font-weight: bold;
+}
+
+#tiempo h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #0f0f0f;
     font-weight: bold;
 }
 

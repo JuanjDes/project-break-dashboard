@@ -12,7 +12,6 @@
 /* modoDashboardT sera true si existe el contenedor meteo-a. Quiere decir que estoy en
     la página principal (index.html) */
 const modoDashboardT = !!document.getElementById('meteo-a');
-console.log(modoDashboardT);
 
 const dashboardDiv = document.getElementById('dashboard');
 const tiempoDiv = document.getElementById('tiempo');
@@ -24,7 +23,6 @@ if (navigator.geolocation) {
     const { latitude, longitude } = position.coords;
 
     const data = await getWeatherData(latitude, longitude);
-    console.log(data);
 
     mostrarDatosClima(data);
   })
@@ -32,14 +30,17 @@ if (navigator.geolocation) {
 
 
 function mostrarDatosClima(data) {
+
   if (modoDashboardT) {
     const tiempoContainer = document.getElementById('meteo-a');
+
     // en tiempoContainer muestro la información del tiempo
     tiempoContainer.innerHTML = `
+      <h3>Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></h3>
       <h2>Tiempo hoy en ${data.location.region} (${data.location.country})</h2>
-      <p>Temperatura: ${data.current.temp_c} ºC</p>
+      <p>Temp: ${data.current.temp_c} ºC</p>
       <p>Humedad: ${data.current.humidity}%</p>
-      <p>Velocidad del viento: ${data.current.wind_kph} km/h</p>
+      <p>Vel. del viento: ${data.current.wind_kph} km/h</p>
       <p>Clima: ${data.current.condition.text}</p>
       <img src="${data.current.condition.icon}" alt="${data.current.condition.text}">
     `;
@@ -88,14 +89,15 @@ function mostrarDatosClima(data) {
         changeBackground();
     }
 
-
       // mostramos datos en pantalla (dashboard)
       tiempoDiv.innerHTML = `
+        <h3>Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></h3>
         <h2>Tiempo hoy en ${data.location.region} (${data.location.country})</h2>
-        <p>Temperatura: ${data.current.temp_c} ºC</p>
+        <hr>
+        <p>Temp: ${data.current.temp_c} ºC</p>
         <p>Humedad: ${data.current.humidity}%</p>
-        <p>Velocidad del viento: ${data.current.wind_kph} km/h</p>
-        <p>Descripción del clima: ${data.current.condition.text}</p>
+        <p>Vel. del viento: ${data.current.wind_kph} km/h</p>
+        <p>Clima: ${data.current.condition.text}</p>
         <img src="${data.current.condition.icon}" alt="${data.current.condition.text}">
       `;
 }
@@ -104,7 +106,7 @@ function mostrarDatosClima(data) {
 async function getWeatherData(latitude, longitude) {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=${latitude},${longitude}`
+      `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=${latitude},${longitude}&lang=es`
       /* `http://api.weatherapi.com/v1/current.json?key=d866afed2e11451795595540240912&q=auto:ip` */
     );
 
