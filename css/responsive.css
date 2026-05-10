@@ -1,0 +1,282 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+button,
+input {
+    max-width: 100%;
+    font: inherit;
+}
+
+button {
+    min-height: 44px;
+}
+
+#dashboard,
+#dashboard-index {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    padding: clamp(16px, 4vw, 32px);
+    overflow-y: auto;
+}
+
+#homeImg {
+    position: fixed;
+    z-index: 20;
+    width: clamp(48px, 9vw, 80px);
+}
+
+#dashboard-index {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    grid-template-areas:
+        "nav nav"
+        "reloj reloj"
+        "password links"
+        "meteo meteo";
+    align-content: start;
+    gap: clamp(16px, 3vw, 28px);
+    padding-top: clamp(90px, 12vw, 120px);
+}
+
+#enlaces,
+#reloj-digital-a,
+#crea-contrasena-a,
+#links-interesantes-a,
+#meteo-a {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+#enlaces {
+    grid-area: nav;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    gap: 10px;
+}
+
+#reloj-digital-a {
+    grid-area: reloj;
+    max-width: 720px;
+    height: auto;
+    margin: 0 auto;
+    padding: clamp(16px, 3vw, 24px);
+    font-size: clamp(2rem, 7vw, 4rem);
+}
+
+#crea-contrasena-a {
+    grid-area: password;
+    padding: 0;
+}
+
+#links-interesantes-a {
+    grid-area: links;
+    padding: 0;
+}
+
+#meteo-a {
+    grid-area: meteo;
+    max-width: 900px;
+    height: auto;
+    margin: 0 auto;
+    padding: clamp(16px, 3vw, 24px);
+}
+
+#meteo-a h2,
+#meteo-a h5 {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    flex-basis: 100%;
+}
+
+#meteo-a h2 {
+    order: 2;
+}
+
+#meteo-a h5 {
+    order: 1;
+}
+
+#meteo-a p {
+    margin: 0;
+    text-align: center;
+}
+
+#contrasena {
+    width: min(100%, 520px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+#contrasena input {
+    width: min(100%, 180px);
+}
+
+#password-result {
+    width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+#links {
+    width: min(100%, 520px);
+    height: auto;
+    min-height: auto;
+    margin: 0 auto;
+}
+
+#links input {
+    width: 100%;
+}
+
+#divEnlaces {
+    width: min(100%, 520px);
+    justify-content: center;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 35vh;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+.link-container {
+    max-width: 100%;
+}
+
+#btnEnlaces,
+.btn-enlace {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+#reloj-digital {
+    width: min(100%, 520px);
+    height: auto;
+    min-height: 180px;
+    font-size: clamp(2.4rem, 13vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#fecha,
+#fraseDiv,
+#zonaHorariaDiv {
+    padding-inline: 12px;
+}
+
+#fecha,
+#fraseDiv {
+    font-size: clamp(1rem, 4vw, 1.4rem);
+}
+
+#tiempo {
+    width: min(100%, 720px);
+    font-size: clamp(1.8rem, 8vw, 3.2rem);
+    text-align: center;
+}
+
+#tiempo img,
+#meteo-a img {
+    max-width: 96px;
+    height: auto;
+}
+
+@media (max-width: 900px) {
+    #dashboard-index {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "nav"
+            "reloj"
+            "password"
+            "links"
+            "meteo";
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        align-items: stretch;
+    }
+
+    #dashboard,
+    #dashboard-index {
+        padding: 82px 12px 20px;
+    }
+
+    #homeImg {
+        top: 12px;
+        left: 12px;
+        width: 52px;
+    }
+
+    #enlaces {
+        flex-direction: column;
+    }
+
+    #enlaces button,
+    #generar,
+    #btnAgregar {
+        width: 100%;
+    }
+
+    #reloj-digital-a {
+        font-size: clamp(2rem, 12vw, 3rem);
+    }
+
+    #meteo-a {
+        flex-direction: column;
+    }
+
+    #meteo-a h5 {
+        font-size: 0.85rem;
+    }
+
+    #meteo-a h2 {
+        font-size: 1rem;
+    }
+
+    #links h2,
+    #contrasena h2 {
+        font-size: 1.25rem;
+    }
+
+    #divEnlaces {
+        max-height: 45vh;
+    }
+}
+
+@media (max-width: 380px) {
+    #dashboard,
+    #dashboard-index {
+        padding-inline: 8px;
+    }
+
+    #reloj-digital-a,
+    #contrasena,
+    #links,
+    #tiempo {
+        padding-inline: 10px;
+    }
+}
